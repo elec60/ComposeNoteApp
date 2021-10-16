@@ -64,7 +64,7 @@ fun AddEditNoteScreen(
                                 title = state.title,
                                 content = state.content,
                                 timestamp = System.currentTimeMillis(),
-                                color = newColor.toArgb()
+                                color = newColor.toArgb(),
                             )
                         )
                     )

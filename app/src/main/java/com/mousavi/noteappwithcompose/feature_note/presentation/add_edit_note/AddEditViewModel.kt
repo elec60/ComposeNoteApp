@@ -25,14 +25,12 @@ class AddEditViewModel @Inject constructor(
     val state: State<AddEditNoteState> = _state
 
     private var noteId: Int? = -1
-    private var color: Int? = -1
 
     private val _flowEvent = MutableSharedFlow<Boolean>()
     val flowEvent: SharedFlow<Boolean> = _flowEvent
 
     init {
         noteId = savedStateHandle.get<Int>("noteId")
-        color = savedStateHandle.get<Int>("color")
 
         if (noteId != -1) {
             viewModelScope.launch {
@@ -51,7 +49,7 @@ class AddEditViewModel @Inject constructor(
         when (event) {
             is AddEditEvent.Save -> {
                 viewModelScope.launch {
-                    useCases.addNote(event.note)
+                    useCases.addNote(event.note.copy(id = noteId))
                     _flowEvent.emit(true)
                 }
             }
