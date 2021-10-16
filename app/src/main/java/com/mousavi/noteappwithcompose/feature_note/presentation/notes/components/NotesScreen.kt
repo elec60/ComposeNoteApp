@@ -1,7 +1,6 @@
 package com.mousavi.noteappwithcompose.feature_note.presentation.notes.components
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -101,20 +100,19 @@ fun NotesScreen(
                                 navController.navigate(
                                     Screen.AddEditScreen().route + "?noteId=${note.id}&color=${note.color}"
                                 )
-                            },
-                        onDeleteClick = {
-                            viewModel.onEvent(NotesEvent.DeleteNote(note))
-                            scope.launch {
-                                val result = scaffoldState.snackbarHostState.showSnackbar(
-                                    message = "Note deleted",
-                                    actionLabel = "Undo",
-                                )
-                                if (result == SnackbarResult.ActionPerformed) {
-                                    viewModel.onEvent(NotesEvent.RestoreNote)
-                                }
+                            }
+                    ) {
+                        viewModel.onEvent(NotesEvent.DeleteNote(note))
+                        scope.launch {
+                            val result = scaffoldState.snackbarHostState.showSnackbar(
+                                message = "Note deleted",
+                                actionLabel = "Undo",
+                            )
+                            if (result == SnackbarResult.ActionPerformed) {
+                                viewModel.onEvent(NotesEvent.RestoreNote)
                             }
                         }
-                    )
+                    }
                     Spacer(modifier = Modifier.height(10.dp))
                 }
             }

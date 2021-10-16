@@ -6,12 +6,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mousavi.noteappwithcompose.feature_note.domain.model.InvalidNoteException
 import com.mousavi.noteappwithcompose.feature_note.domain.use_case.NoteUseCases
 import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.util.AddEditEvent
 import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.util.AddEditNoteState
+import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.util.OneTimeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,8 +29,8 @@ class AddEditViewModel @Inject constructor(
 
     private var noteId: Int? = -1
 
-    private val _flowEvent = MutableSharedFlow<Boolean>()
-    val flowEvent: SharedFlow<Boolean> = _flowEvent
+    private val _flowEvent = MutableSharedFlow<OneTimeUiState>()
+    val flowEvent = _flowEvent.asSharedFlow()
 
     init {
         noteId = savedStateHandle.get<Int>("noteId")
@@ -49,8 +52,17 @@ class AddEditViewModel @Inject constructor(
         when (event) {
             is AddEditEvent.Save -> {
                 viewModelScope.launch {
-                    useCases.addNote(event.note.copy(id = noteId))
-                    _flowEvent.emit(true)
+                    try {
+                        useCases.addNote(event.note.copy(id = noteId))
+                        _flowEvent.emit(OneTimeUiState.NavigateUp)
+                    } catch (e: InvalidNoteException) {
+                        _flowEvent.emit(
+                            OneTimeUiState.Snackbar(
+                                e.message ?: "an error occurred."
+                            )
+                        )
+                    }
+
                 }
             }
             is AddEditEvent.Content -> {

@@ -7,6 +7,7 @@ import com.mousavi.noteappwithcompose.feature_note.domain.repository.NoteReposit
 class AddNote(
     private val repository: NoteRepository
 ) {
+    @Throws(InvalidNoteException::class)
     suspend operator fun invoke(note: Note) {
         if (note.title.isBlank()) {
             throw InvalidNoteException("title can't be empty.")

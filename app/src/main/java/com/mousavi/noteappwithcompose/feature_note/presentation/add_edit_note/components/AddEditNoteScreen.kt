@@ -22,6 +22,7 @@ import androidx.navigation.NavController
 import com.mousavi.noteappwithcompose.feature_note.domain.model.Note
 import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.util.AddEditEvent
 import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.AddEditViewModel
+import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.util.OneTimeUiState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -33,15 +34,22 @@ fun AddEditNoteScreen(
 ) {
     val state = viewModel.state.value
     val sharedFlow = viewModel.flowEvent
+    val scope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState()
 
     LaunchedEffect(true) {
         sharedFlow.collect {
-            if (it) {
+            if (it is OneTimeUiState.NavigateUp) {
                 navController.navigateUp()
+            } else if (it is OneTimeUiState.Snackbar) {
+                launch {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = it.message
+                    )
+                }
             }
         }
     }
-    val scaffoldState = rememberScaffoldState()
 
     val colorAnim = remember {
         Animatable(initialValue = color)
@@ -51,7 +59,6 @@ fun AddEditNoteScreen(
         mutableStateOf(color)
     }
 
-    val scope = rememberCoroutineScope()
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -133,7 +140,7 @@ fun AddEditNoteScreen(
 
             TransparentTextField(
                 text = state.content,
-                maxLines = 1,
+                maxLines = 20,
                 isHintVisible = state.content.isBlank(),
                 hint = "Enter some content...",
                 onValueChange = {
