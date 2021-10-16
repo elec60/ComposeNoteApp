@@ -110,8 +110,8 @@ fun AddEditNoteScreen(
                                     color,
                                     animationSpec = tween(durationMillis = 500)
                                 )
-                                newColor = color
                             }
+                            newColor = color
                         }
                     )
                 }
