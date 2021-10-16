@@ -45,6 +45,10 @@ fun AddEditNoteScreen(
         Animatable(initialValue = color)
     }
 
+    var newColor by remember {
+        mutableStateOf(color)
+    }
+
     var titleState by remember {
         mutableStateOf(state.title)
     }
@@ -66,7 +70,7 @@ fun AddEditNoteScreen(
                                 title = titleState,
                                 content = contentState,
                                 timestamp = System.currentTimeMillis(),
-                                color = state.color.toArgb()
+                                color = newColor.toArgb()
                             )
                         )
                     )
@@ -106,6 +110,7 @@ fun AddEditNoteScreen(
                                     color,
                                     animationSpec = tween(durationMillis = 500)
                                 )
+                                newColor = color
                             }
                         }
                     )
