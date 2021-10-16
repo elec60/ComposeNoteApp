@@ -17,23 +17,22 @@ fun TransparentTextField(
     hint: String,
     onValueChange: (String) -> Unit
 ) {
-    var state by remember {
-        mutableStateOf(text)
-    }
     Box(
         contentAlignment = Alignment.CenterStart
     ){
         BasicTextField(
-            value = state,
+            value = text,
             onValueChange = {
                 onValueChange(it)
-                state = it
             },
             maxLines = maxLines,
             textStyle = TextStyle(color = Color.Black)
         )
         if (isHintVisible) {
-            Text(text = hint,style = TextStyle(color = Color.Black))
+            Text(
+                text = hint,
+                style = TextStyle(color = Color.LightGray)
+            )
         }
     }
 

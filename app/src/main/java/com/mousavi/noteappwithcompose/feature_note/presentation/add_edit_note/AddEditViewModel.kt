@@ -57,12 +57,12 @@ class AddEditViewModel @Inject constructor(
             }
             is AddEditEvent.Content -> {
                 _state.value = state.value.copy(
-                    title = event.value
+                    content = event.value
                 )
             }
             is AddEditEvent.Title -> {
                 _state.value = state.value.copy(
-                    content = event.value
+                    title = event.value
                 )
             }
         }

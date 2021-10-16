@@ -51,10 +51,6 @@ fun AddEditNoteScreen(
         mutableStateOf(color)
     }
 
-    var contentState by remember {
-        mutableStateOf(state.content)
-    }
-
     val scope = rememberCoroutineScope()
 
     Scaffold(
