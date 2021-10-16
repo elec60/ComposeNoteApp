@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavArgument
@@ -16,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.mousavi.noteappwithcompose.feature_note.domain.model.Note
 import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.components.AddEditNoteScreen
 import com.mousavi.noteappwithcompose.feature_note.presentation.notes.components.NotesScreen
 import com.mousavi.noteappwithcompose.feature_note.presentation.util.Screen
@@ -56,7 +58,13 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            AddEditNoteScreen(navController)
+                            val int = it.arguments?.getInt("color")
+                            val color:Color = if (int != -1){
+                                Color(int!!)
+                            }else {
+                                Note.noteColors.random()
+                            }
+                            AddEditNoteScreen(navController, color = color)
                         }
 
                     }

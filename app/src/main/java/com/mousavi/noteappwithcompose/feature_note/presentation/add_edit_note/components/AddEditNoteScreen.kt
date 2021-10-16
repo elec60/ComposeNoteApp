@@ -1,7 +1,6 @@
 package com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.components
 
 import androidx.compose.animation.Animatable
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,7 +26,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun AddEditNoteScreen(
     navController: NavController,
-    viewModel: AddEditViewModel = hiltViewModel()
+    viewModel: AddEditViewModel = hiltViewModel(),
+    color: Color
 ) {
     val state = viewModel.state.value
     val sharedFlow = viewModel.flowEvent
@@ -42,7 +42,7 @@ fun AddEditNoteScreen(
     val scaffoldState = rememberScaffoldState()
 
     val colorAnim = remember {
-        Animatable(initialValue = state.color)
+        Animatable(initialValue = color)
     }
 
     var titleState by remember {
