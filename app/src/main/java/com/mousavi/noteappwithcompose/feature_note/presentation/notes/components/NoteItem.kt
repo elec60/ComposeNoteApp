@@ -1,5 +1,6 @@
 package com.mousavi.noteappwithcompose.feature_note.presentation.notes.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -29,10 +31,10 @@ fun NoteItem(
         elevation = 10.dp,
         shape = RoundedCornerShape(cornerRadius)
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(color = Color(note.color))
                 .padding(16.dp),
             content = {
                 Text(
