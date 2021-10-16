@@ -23,7 +23,7 @@ fun TransparentTextField(
     Box(
         contentAlignment = Alignment.CenterStart
     ){
-        TextField(
+        BasicTextField(
             value = state,
             onValueChange = {
                 onValueChange(it)

@@ -1,6 +1,7 @@
 package com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.components
 
 import androidx.compose.animation.Animatable
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -85,6 +86,7 @@ fun AddEditNoteScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .background(colorAnim.value)
+                .padding(horizontal = 16.dp)
 
         ) {
             Row(
@@ -109,6 +111,8 @@ fun AddEditNoteScreen(
                     )
                 }
             }
+
+            Spacer(modifier = Modifier.height(20.dp))
 
             TransparentTextField(
                 text = titleState,
