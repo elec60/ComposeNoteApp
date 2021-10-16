@@ -55,6 +55,16 @@ class AddEditViewModel @Inject constructor(
                     _flowEvent.emit(true)
                 }
             }
+            is AddEditEvent.Content -> {
+                _state.value = state.value.copy(
+                    title = event.value
+                )
+            }
+            is AddEditEvent.Title -> {
+                _state.value = state.value.copy(
+                    content = event.value
+                )
+            }
         }
     }
 }

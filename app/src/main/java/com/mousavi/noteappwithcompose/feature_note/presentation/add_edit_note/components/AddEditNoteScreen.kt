@@ -3,6 +3,7 @@ package com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.c
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -12,6 +13,7 @@ import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
@@ -49,10 +51,6 @@ fun AddEditNoteScreen(
         mutableStateOf(color)
     }
 
-    var titleState by remember {
-        mutableStateOf(state.title)
-    }
-
     var contentState by remember {
         mutableStateOf(state.content)
     }
@@ -67,8 +65,8 @@ fun AddEditNoteScreen(
                     viewModel.onEvent(
                         AddEditEvent.Save(
                             Note(
-                                title = titleState,
-                                content = contentState,
+                                title = state.title,
+                                content = state.content,
                                 timestamp = System.currentTimeMillis(),
                                 color = newColor.toArgb()
                             )
@@ -102,7 +100,13 @@ fun AddEditNoteScreen(
                 Note.noteColors.forEach { color ->
                     Box(modifier = Modifier
                         .size(50.dp)
+                        .border(
+                            width = 2.dp,
+                            color = if (newColor == color) Color.Black else Color.Transparent,
+                            shape = CircleShape
+                        )
                         .clip(shape = CircleShape)
+                        .shadow(10.dp, CircleShape)
                         .background(color)
                         .clickable {
                             scope.launch {
@@ -120,24 +124,24 @@ fun AddEditNoteScreen(
             Spacer(modifier = Modifier.height(20.dp))
 
             TransparentTextField(
-                text = titleState,
+                text = state.title,
                 maxLines = 1,
-                isHintVisible = titleState.isBlank(),
+                isHintVisible = state.title.isBlank(),
                 hint = "Enter title...",
                 onValueChange = {
-                    titleState = it
+                    viewModel.onEvent(AddEditEvent.Title(it))
                 }
             )
 
             Spacer(modifier = Modifier.height(20.dp))
 
             TransparentTextField(
-                text = contentState,
+                text = state.content,
                 maxLines = 1,
-                isHintVisible = contentState.isBlank(),
+                isHintVisible = state.content.isBlank(),
                 hint = "Enter some content...",
                 onValueChange = {
-                    contentState = it
+                    viewModel.onEvent(AddEditEvent.Content(it))
                 }
             )
         }
