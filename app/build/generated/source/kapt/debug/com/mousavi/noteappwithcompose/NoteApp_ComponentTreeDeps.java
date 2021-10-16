@@ -81,13 +81,13 @@ import hilt_aggregated_deps._dagger_hilt_android_internal_modules_HiltWrapper_Ac
         _dagger_hilt_android_internal_managers_ViewComponentManager_ViewWithFragmentComponentBuilderEntryPoint.class,
         _dagger_hilt_android_internal_modules_ApplicationContextModule.class,
         _dagger_hilt_android_internal_modules_HiltWrapper_ActivityModule.class,
-        _com_mousavi_noteappwithcompose_feature_note_presentation_notes_NotesViewModel_HiltModules_KeyModule.class,
-        _com_mousavi_noteappwithcompose_feature_note_presentation_notes_NotesViewModel_HiltModules_BindsModule.class,
         _com_mousavi_noteappwithcompose_NoteApp_GeneratedInjector.class,
         _com_mousavi_noteappwithcompose_feature_note_presentation_MainActivity_GeneratedInjector.class,
         _com_mousavi_noteappwithcompose_di_AppModule.class,
         _com_mousavi_noteappwithcompose_feature_note_presentation_add_edit_note_AddEditViewModel_HiltModules_BindsModule.class,
-        _com_mousavi_noteappwithcompose_feature_note_presentation_add_edit_note_AddEditViewModel_HiltModules_KeyModule.class
+        _com_mousavi_noteappwithcompose_feature_note_presentation_add_edit_note_AddEditViewModel_HiltModules_KeyModule.class,
+        _com_mousavi_noteappwithcompose_feature_note_presentation_notes_NotesViewModel_HiltModules_BindsModule.class,
+        _com_mousavi_noteappwithcompose_feature_note_presentation_notes_NotesViewModel_HiltModules_KeyModule.class
     }
 )
 class NoteApp_ComponentTreeDeps {

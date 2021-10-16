@@ -1,4 +1,4 @@
-package com.mousavi.noteappwithcompose.feature_note.presentation.notes
+package com.mousavi.noteappwithcompose.feature_note.presentation.notes.util
 
 import com.mousavi.noteappwithcompose.feature_note.domain.model.Note
 import com.mousavi.noteappwithcompose.feature_note.domain.util.NoteOrder

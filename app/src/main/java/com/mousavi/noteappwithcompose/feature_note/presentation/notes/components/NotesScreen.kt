@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.mousavi.noteappwithcompose.feature_note.presentation.notes.NotesEvent
+import com.mousavi.noteappwithcompose.feature_note.presentation.notes.util.NotesEvent
 import com.mousavi.noteappwithcompose.feature_note.presentation.notes.NotesViewModel
 import com.mousavi.noteappwithcompose.feature_note.presentation.util.Screen
 import kotlinx.coroutines.launch
@@ -97,7 +97,9 @@ fun NotesScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                navController.navigate(Screen.AddEditScreen().route + "?noteId${note.id}&color${note.color}")
+                                navController.navigate(
+                                    Screen.AddEditScreen().route + "?noteId=${note.id}&color=${note.color}"
+                                )
                             },
                         onDeleteClick = {
                             viewModel.onEvent(NotesEvent.DeleteNote(note))
@@ -112,6 +114,7 @@ fun NotesScreen(
                             }
                         }
                     )
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))

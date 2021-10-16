@@ -39,7 +39,8 @@ class MainActivity : ComponentActivity() {
                             NotesScreen(navController)
                         }
                         composable(
-                            route = Screen.AddEditScreen().route + "?noteId={notId}&color={color}",
+                            route = Screen.AddEditScreen().route +
+                                    "?noteId={noteId}&color={color}",
                             arguments = listOf(
                                 navArgument(
                                     name = "noteId"

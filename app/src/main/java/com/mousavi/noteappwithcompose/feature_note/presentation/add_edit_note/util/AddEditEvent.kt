@@ -1,4 +1,4 @@
-package com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note
+package com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.util
 
 import com.mousavi.noteappwithcompose.feature_note.domain.model.Note
 

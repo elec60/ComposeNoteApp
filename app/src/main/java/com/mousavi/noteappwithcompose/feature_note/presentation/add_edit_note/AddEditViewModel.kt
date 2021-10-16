@@ -2,10 +2,13 @@ package com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mousavi.noteappwithcompose.feature_note.domain.use_case.NoteUseCases
+import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.util.AddEditEvent
+import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.util.AddEditNoteState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -30,6 +33,18 @@ class AddEditViewModel @Inject constructor(
     init {
         noteId = savedStateHandle.get<Int>("noteId")
         color = savedStateHandle.get<Int>("color")
+
+        if (noteId != -1) {
+            viewModelScope.launch {
+                useCases.getNote(noteId!!)?.let { note ->
+                    _state.value = state.value.copy(
+                        title = note.title,
+                        content = note.content,
+                        color = Color(note.color)
+                    )
+                }
+            }
+        }
     }
 
     fun onEvent(event: AddEditEvent) {

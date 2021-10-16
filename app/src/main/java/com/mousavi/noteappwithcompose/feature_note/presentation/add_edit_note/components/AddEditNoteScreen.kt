@@ -1,7 +1,6 @@
 package com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.components
 
 import androidx.compose.animation.Animatable
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mousavi.noteappwithcompose.feature_note.domain.model.Note
-import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.AddEditEvent
+import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.util.AddEditEvent
 import com.mousavi.noteappwithcompose.feature_note.presentation.add_edit_note.AddEditViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
